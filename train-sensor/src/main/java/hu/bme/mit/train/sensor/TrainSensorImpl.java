@@ -28,11 +28,8 @@ public class TrainSensorImpl implements TrainSensor {
 	}
 
 	private void checkSpeed(int speedLimit){
-		if (speedLimit < 0 || speedLimit > 500){
-			this.user.setInWarningState(true);
-		}
 		int referenceSpeed = this.controller.getReferenceSpeed();
-		if (referenceSpeed-speedLimit < referenceSpeed/2){
+		if (speedLimit < 0 || speedLimit >= 500 || referenceSpeed-speedLimit > referenceSpeed/2){
 			this.user.setInWarningState(true);
 		}
 	}
