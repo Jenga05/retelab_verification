@@ -14,10 +14,11 @@ public class TrainSystemTest {
 	TrainController controller;
 	TrainSensor sensor;
 	TrainUser user;
-	
+	TrainSystem system;
+
 	@Before
 	public void before() {
-		TrainSystem system = new TrainSystem();
+		system = new TrainSystem();
 		controller = system.getController();
 		sensor = system.getSensor();
 		user = system.getUser();
@@ -33,20 +34,20 @@ public class TrainSystemTest {
 		
 		user.overrideJoystickPosition(5);
 
-		controller.followSpeed();
+		system.timeTick();
 		Assert.assertEquals(5, controller.getReferenceSpeed());
-		controller.followSpeed();
+		system.timeTick();
 		Assert.assertEquals(10, controller.getReferenceSpeed());
-		controller.followSpeed();
+		system.timeTick();
 		Assert.assertEquals(10, controller.getReferenceSpeed());
 	}
 
 	@Test
 	public void OverridingJoystickPositionToNegative_SetsReferenceSpeedToZero() {
 		user.overrideJoystickPosition(4);
-		controller.followSpeed();
+		system.timeTick();
 		user.overrideJoystickPosition(-5);
-		controller.followSpeed();
+		system.timeTick();
 		Assert.assertEquals(0, controller.getReferenceSpeed());
 	}
 

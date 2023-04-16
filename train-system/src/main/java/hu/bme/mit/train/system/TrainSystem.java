@@ -25,4 +25,8 @@ public class TrainSystem {
 		return user;
 	}
 
+	void timeTick(){
+		controller.followSpeed();
+	}
+
 }
